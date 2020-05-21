@@ -29,7 +29,9 @@ you probably would miss something anyway. Only a visual diff would ensure that
 1. If you're not already, register for Applitools Eyes at <https://applitools.com/register>
 1. Login to the Eyes Test Manager at <https://eyes.applitools.com/>
 1. Copy your Applitools API key from <https://eyes.applitools.com/>:
+
 ![Getting the Applitools API key](./.github/applitools-api-key.png)
+
 1. Create an environment variable in your Netlify site's settings called `APPLITOOLS_API_KEY`:
    * Go to your site's page in Netlify
    * Click on "Site settings"
