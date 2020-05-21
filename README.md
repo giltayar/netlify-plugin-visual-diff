@@ -83,7 +83,8 @@ you probably would miss something anyway. Only a visual diff would ensure that
    For a full list of browsers and configurations,
    see <https://www.npmjs.com/package/@applitools/eyes-cypress#configuring-the-browser>
 
-1. That's it! Your next deploys will be visually checked, and if there is a diff, the build will
+1. That's it! Your next deploys will be visually checked on all the browsers and form factors you specified,
+   and if there is a diff, the build will
    fail and a link to the Visual test will be added to the build so that you can verify that
    there is a problem, or approve the changes so that your next build will succeed.
 
@@ -111,8 +112,26 @@ and you're good to go. But it _is_ configurable, using the following configurati
   specify a selector that defines which elements to ignore
   (remember you can have a selector with multiple elements using a `,`),
   e.g. `ignoreSelector = "#today,.copyright"`. Default: none.
-* `failCypressOnDiff`: if you wish to only run the Visual test (to see the result in the Eyes
-  manager), without it failing the build, set this to `false`, e.g `failCypressOnDiff = false`.
+* `failBuildOnDiff`: if you wish to only run the Visual test (to see the result in the Eyes
+  manager), without it failing the build, set this to `false`, e.g `failBuildOnDiff = false`.
   Default: `true`.
 * `concurrency`: specify a higher level of concurrency to make the test faster.
   For more information, see <https://www.npmjs.com/package/@applitools/eyes-cypress#concurrency>.
+* `browser`: an array of browsers.
+  For more information, see <https://www.npmjs.com/package/@applitools/eyes-cypress#configuring-the-browser>.
+
+The default configuration, if none is specified, is:
+
+```toml
+[[plugins]]
+  package = "netlify-plugin-visual-diff"
+  [plugins.inputs]
+  serverUrl = "https://eyesapi.applitools.com" # The public Eyes server
+  ignoreSelector = "" # There is no null in TOML, but if there were, then it would be null
+  failBuildOnDiff = true
+  concurrency = 1
+  [[[plugin.inputs.browser]]]
+  name = "chrome"
+  width = 1024
+  height = 768
+```
